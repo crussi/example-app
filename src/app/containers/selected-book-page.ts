@@ -2,8 +2,8 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import * as fromRoot from '../reducers';
-import * as collection from '../actions/collection';
+import * as fromRoot from '../state-management/reducers';
+import * as collection from '../state-management/actions/collection';
 import { Book } from '../models/book';
 
 

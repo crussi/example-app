@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Book } from '../models/book';
+import { Book } from '../../models/book';
 
 export const SEARCH =           '[Book] Search';
 export const SEARCH_COMPLETE =  '[Book] Search Complete';

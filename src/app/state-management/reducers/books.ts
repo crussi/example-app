@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
-import { Book } from '../models/book';
-import * as book from '../actions/book';
-import * as collection from '../actions/collection';
+import { Book } from '../../models/book';
+import * as book from '../../state-management/actions/book';
+import * as collection from '../../state-management/actions/collection';
 
 
 export interface State {

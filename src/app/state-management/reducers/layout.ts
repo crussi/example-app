@@ -1,4 +1,4 @@
-import * as layout from '../actions/layout';
+import * as layout from '../../state-management/actions/layout';
 
 
 export interface State {

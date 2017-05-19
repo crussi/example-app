@@ -1,8 +1,8 @@
 import { reducer } from './books';
 import * as fromBooks from './books';
-import { SearchCompleteAction, LoadAction, SelectAction } from '../actions/book';
-import { Book } from '../models/book';
-import { LoadSuccessAction } from '../actions/collection';
+import { SearchCompleteAction, LoadAction, SelectAction } from '../../state-management/actions/book';
+import { Book } from '../../models/book';
+import { LoadSuccessAction } from '../../state-management/actions/collection';
 
 describe('BooksReducer', () => {
   describe('undefined action', () => {

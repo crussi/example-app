@@ -1,4 +1,4 @@
-import * as book from '../actions/book';
+import * as book from '../../state-management/actions/book';
 
 
 export interface State {

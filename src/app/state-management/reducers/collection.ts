@@ -1,4 +1,4 @@
-import * as collection from '../actions/collection';
+import * as collection from '../../state-management/actions/collection';
 
 
 export interface State {

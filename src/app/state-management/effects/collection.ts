@@ -13,7 +13,7 @@ import { defer } from 'rxjs/observable/defer';
 import { of } from 'rxjs/observable/of';
 
 import * as collection from '../actions/collection';
-import { Book } from '../models/book';
+import { Book } from '../../models/book';
 
 
 @Injectable()

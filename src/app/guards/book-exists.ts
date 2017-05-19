@@ -12,8 +12,8 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
 import { GoogleBooksService } from '../services/google-books';
-import * as fromRoot from '../reducers';
-import * as book from '../actions/book';
+import * as fromRoot from '../state-management/reducers';
+import * as book from '../state-management/actions/book';
 
 
 /**

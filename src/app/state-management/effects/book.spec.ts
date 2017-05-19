@@ -3,10 +3,10 @@ import 'rxjs/add/observable/throw';
 import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { BookEffects } from './book';
-import { GoogleBooksService } from '../services/google-books';
+import { GoogleBooksService } from '../../services/google-books';
 import { Observable } from 'rxjs/Observable';
 import { SearchAction, SearchCompleteAction } from '../actions/book';
-import { Book } from '../models/book';
+import { Book } from '../../models/book';
 
 describe('BookEffects', () => {
   beforeEach(() => TestBed.configureTestingModule({

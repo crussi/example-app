@@ -12,8 +12,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
-import { BookEffects } from './effects/book';
-import { CollectionEffects } from './effects/collection';
+import { BookEffects } from './state-management/effects/book';
+import { CollectionEffects } from './state-management/effects/collection';
 import { BookExistsGuard } from './guards/book-exists';
 
 import { AppComponent } from './containers/app';
@@ -26,7 +26,7 @@ import { NotFoundPageComponent } from './containers/not-found-page';
 import { GoogleBooksService } from './services/google-books';
 
 import { routes } from './routes';
-import { reducer } from './reducers';
+import { reducer } from './state-management/reducers';
 import { schema } from './db';
 
 
