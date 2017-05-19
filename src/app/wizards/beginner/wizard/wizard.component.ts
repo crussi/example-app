@@ -1,7 +1,7 @@
 import { Component, Input, AfterViewInit, AfterContentInit, ViewChild, ComponentFactoryResolver, OnDestroy, OnInit, OnChanges, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 //import { AdDirective } from '../../ad.directive';
-import { WizardDirective } from '../../wizard.directive';
+import { WizardDirective } from '../wizard.directive';
 //import { AdItem }      from './ad-item';
 //import { StepYesNo, StepOptions} from '../step.model';
 import { StepEnum } from '../step.enum';

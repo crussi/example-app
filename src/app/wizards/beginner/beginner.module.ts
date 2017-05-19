@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 import { BaseComponent } from './base/base.component';
 import { Delegate } from './delegate/delegate.component';
 import { Done } from './done/done.component';
@@ -15,9 +17,13 @@ import { ApproveChange } from './approvechange/approvechange.component';
 import { StepService } from './step.service';
 import { WizardDirective } from './wizard.directive';
 
+export const COMPONENTS = [BeginnerWizard];
+
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
                 ApproveChange,
@@ -45,6 +51,7 @@ import { WizardDirective } from './wizard.directive';
                 Schedule, 
                 YesNo 
                   ],     
-  providers: [StepService]           
+  providers: [StepService],
+  exports: COMPONENTS
 })
 export class BeginnerModule { }

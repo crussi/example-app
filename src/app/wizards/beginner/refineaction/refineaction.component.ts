@@ -4,7 +4,7 @@ import { StepEnum } from '../step.enum';
 
 @Component({
   selector: 'refineaction',
-  //templateUrl: './isactionable.component.html',
+  //templateUrl: './refineaction.component.html',
   template: `
     <div>
       <h2 *ngIf="hasDeclaration">{{Declaration}}</h2>

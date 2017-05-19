@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { BookExistsGuard } from './guards/book-exists';
 import { FindBookPageComponent } from './containers/find-book-page';
+import { InboxBeginnerPageComponent } from './containers/inbox-beginner-page';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
@@ -20,6 +21,10 @@ export const routes: Routes = [
     canActivate: [ BookExistsGuard ],
     component: ViewBookPageComponent
   },
+  {
+    path: 'wizard',
+    component: InboxBeginnerPageComponent
+  }, 
   {
     path: '**',
     component: NotFoundPageComponent

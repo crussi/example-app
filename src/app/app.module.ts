@@ -12,12 +12,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
+import { BeginnerModule } from './wizards/beginner/beginner.module';
 import { BookEffects } from './state-management/effects/book';
 import { CollectionEffects } from './state-management/effects/collection';
 import { BookExistsGuard } from './guards/book-exists';
 
 import { AppComponent } from './containers/app';
 import { FindBookPageComponent } from './containers/find-book-page';
+import { InboxBeginnerPageComponent } from './containers/inbox-beginner-page';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { SelectedBookPageComponent } from './containers/selected-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
@@ -38,6 +40,7 @@ import { schema } from './db';
     BrowserAnimationsModule,
     MaterialModule,
     ComponentsModule,
+    BeginnerModule,
     RouterModule.forRoot(routes, { useHash: true }),
 
     /**
@@ -85,6 +88,7 @@ import { schema } from './db';
   declarations: [
     AppComponent,
     FindBookPageComponent,
+    InboxBeginnerPageComponent,
     SelectedBookPageComponent,
     ViewBookPageComponent,
     CollectionPageComponent,

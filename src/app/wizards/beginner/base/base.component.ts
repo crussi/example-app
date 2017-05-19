@@ -2,9 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StepEnum } from '../step.enum';
 import { StepTransition, StepSettings, WizStateChange, StepState } from '../step.model';
 
+
 @Component({
   selector: 'base',
-  //templateUrl: './isactionable.component.html',
+  //templateUrl: './base.component.html',
   template: `
     <div></div>
   `,  
@@ -17,6 +18,8 @@ export class BaseComponent implements OnInit  {
   //@Input() trigger: Number;
   // @Output() stepChanged: EventEmitter<StepTransition> = new EventEmitter();
   @Output() stateChanged: EventEmitter<WizStateChange> = new EventEmitter();
+
+  //constructor() { }
 
   get Question(): string {
     return this.Settings.Question;
@@ -66,7 +69,7 @@ export class BaseComponent implements OnInit  {
   get hasCancel(): boolean {
     return this.Settings.Steps.hasCancel;
   } 
-  constructor() { }
+
 
   ngOnInit() {
     //this.Initialize();

@@ -19,6 +19,9 @@ import * as layout from '../state-management/actions/layout';
         <bc-nav-item (activate)="closeSidenav()" routerLink="/book/find" icon="search" hint="Find your next book!">
           Browse Books
         </bc-nav-item>
+        <bc-nav-item (activate)="closeSidenav()" routerLink="/wizard" icon="search" hint="Start wizard">
+          Start wizard
+        </bc-nav-item>        
       </bc-sidenav>
       <bc-toolbar (openMenu)="openSidenav()">
         Book Collection
