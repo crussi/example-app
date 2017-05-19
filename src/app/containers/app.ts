@@ -4,7 +4,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../state-management/reducers';
-import * as layout from '../actions/layout';
+import * as layout from '../state-management/actions/layout';
 
 
 @Component({
