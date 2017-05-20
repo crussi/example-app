@@ -1,10 +1,13 @@
 import { Action } from '@ngrx/store';
+import { WizStateChange, StepTransition } from '../../wizards/beginner/step.model';
+export const STATECHANGE =   '[Wizard] State Change';
 
-export const TEST =   '[Wizard] Test';
-
-export class WizardTestAction implements Action {
-  readonly type = TEST;
+export class StateChangeAction implements Action {
+  readonly type = STATECHANGE;
+  constructor(public payload: WizStateChange) { 
+    console.log('Wizard STATECHANGE payload',payload);
+  }
 }
 
 
-export type Actions = WizardTestAction;
+export type Actions = StateChangeAction;

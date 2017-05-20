@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
 import { StepEnum } from '../step.enum';
+import { WizStateChange, StepTransition } from '../step.model';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../state-management/reducers';
-import * as test from '../../../state-management/actions/wizard';
+import * as action from '../../../state-management/actions/wizard';
 
 @Component({
   selector: 'yesno',
@@ -22,8 +23,7 @@ import * as test from '../../../state-management/actions/wizard';
 export class YesNo extends BaseComponent implements OnInit   {
 
 
-private store: Store<fromRoot.State>
-  constructor() { 
+  constructor(private store: Store<fromRoot.State>) { 
     super();
   }
 
@@ -32,9 +32,11 @@ private store: Store<fromRoot.State>
 
   }
 
-  StateChange(nextStep:StepEnum, val:any) {
-    this.store.dispatch(new test.WizardTestAction());
+  StateChanged(nextStep:StepEnum, val:any) {
+    console.log('StateChange YesNo dispatch ...',this.store);
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
     //super.StateChanged(nextStep, val);
+    this.store.dispatch(new action.StateChangeAction(stateChange));
   }
 
 

@@ -16,7 +16,7 @@ import { YesNo } from './yesno/yesno.component';
 import { ApproveChange } from './approvechange/approvechange.component';
 import { StepService } from './step.service';
 import { WizardDirective } from './wizard.directive';
-
+import { InboxItemProcessed } from './step.model';
 export const COMPONENTS = [BeginnerWizard];
 
 @NgModule({

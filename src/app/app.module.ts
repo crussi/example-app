@@ -26,6 +26,7 @@ import { CollectionPageComponent } from './containers/collection-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
 
 import { GoogleBooksService } from './services/google-books';
+import { InboxService } from './services/inbox.service';
 
 import { routes } from './routes';
 import { reducer } from './state-management/reducers';
@@ -96,7 +97,8 @@ import { schema } from './db';
   ],
   providers: [
     BookExistsGuard,
-    GoogleBooksService
+    GoogleBooksService,
+    InboxService
   ],
   bootstrap: [
     AppComponent

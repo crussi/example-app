@@ -41,6 +41,7 @@ import * as fromSearch from './search';
 import * as fromBooks from './books';
 import * as fromCollection from './collection';
 import * as fromLayout from './layout';
+import * as fromWizard from './wizard';
 
 
 /**
@@ -52,6 +53,7 @@ export interface State {
   books: fromBooks.State;
   collection: fromCollection.State;
   layout: fromLayout.State;
+  wizard: fromWizard.State;
   router: fromRouter.RouterState;
 }
 
@@ -68,6 +70,7 @@ const reducers = {
   books: fromBooks.reducer,
   collection: fromCollection.reducer,
   layout: fromLayout.reducer,
+  wizard: fromWizard.reducer,
   router: fromRouter.routerReducer,
 };
 

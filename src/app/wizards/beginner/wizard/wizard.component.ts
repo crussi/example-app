@@ -7,6 +7,7 @@ import { WizardDirective } from '../wizard.directive';
 import { StepEnum } from '../step.enum';
 import { Step, StepTransition, WizState, StepState, WizStateChange, InboxItemProcessed, InboxItem } from '../step.model';
 import { BaseComponent } from '../base/base.component';
+import { StepService } from '../step.service';
 
 @Component({
   selector: 'beginner-wizard',
@@ -29,7 +30,8 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   interval: any;
   displayDesc = true;
 
-  constructor(private _componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private _componentFactoryResolver: ComponentFactoryResolver,
+              private stepService: StepService) { }
 
   ngOnInit(){
 
@@ -61,7 +63,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   initialize(){
     this.State = new WizState(this.inboxItem);    
     this.loadComponent(new StepTransition(StepEnum.Start,StepEnum.IsActionable));
-    
+    this.steps = this.stepService.getSteps();
   }
 
   stateChanged(stateChange:WizStateChange) {
