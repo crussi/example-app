@@ -141,10 +141,14 @@ export const getSearchResults = createSelector(getBookEntities, getSearchBookIds
 
 
 export const getCollectionState = (state: State) => state.collection;
+export const getWizardState = (state: State) => state.wizard;
 
 export const getCollectionLoaded = createSelector(getCollectionState, fromCollection.getLoaded);
 export const getCollectionLoading = createSelector(getCollectionState, fromCollection.getLoading);
 export const getCollectionBookIds = createSelector(getCollectionState, fromCollection.getIds);
+
+export const getWizardLoaded = createSelector(getWizardState, fromWizard.getLoaded);
+//export const getWizardLoading = createSelector(getWizardState, fromWizard.getLoading);
 
 export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
   return ids.map(id => entities[id]);

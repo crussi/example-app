@@ -1,6 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
-import { StepEnum } from '../step.enum';
+import { StepEnum, WizStateChange, StepTransition } from '../../../shared/barrel';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../state-management/reducers';
+import * as action from '../../../state-management/actions/wizard';
 
 @Component({
   selector: 'approvechange',
@@ -17,7 +20,7 @@ import { StepEnum } from '../step.enum';
 })
 export class ApproveChange extends BaseComponent implements OnInit   {
 
-  constructor() { 
+  constructor(private store: Store<fromRoot.State>) { 
     super();
   }
 
@@ -26,14 +29,22 @@ export class ApproveChange extends BaseComponent implements OnInit   {
   }
   
   Ok(step:StepEnum){
-    console.log('ok logic goes here');
+    //console.log('ok logic goes here');
     //super.LoadStep(step)
-    super.StateChanged(step,{'hello':'ok world'});
+    //super.EmitStateChanged(step,{'hello':'ok world'});
+    let val = {'approve':'ok'};
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,step));
+    super.EmitStateChanged(stateChange);
+    this.store.dispatch(new action.StateChangeAction(stateChange));
+    
   }
 
   Cancel(step:StepEnum){
-    console.log('cancel logic goes here');
-    super.StateChanged(step,undefined);
+    //console.log('cancel logic goes here');
+    let val = {'approve':'ok'};
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,step));
+    super.EmitStateChanged(stateChange);
+    this.store.dispatch(new action.StateChangeAction(stateChange));
   }
 
 }

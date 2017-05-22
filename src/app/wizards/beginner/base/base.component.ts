@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StepEnum } from '../step.enum';
-import { StepTransition, StepSettings, WizStateChange, StepState } from '../step.model';
+import { StepEnum } from '../../../shared/barrel';
+import { StepTransition, StepSettings, WizStateChange, StepState } from '../../../shared/barrel';
 
 
 @Component({
@@ -83,7 +83,12 @@ export class BaseComponent implements OnInit  {
   // StateChanged(change:WizStateChange) {
   //   this.stateChanged.emit(change);
   // }
-  StateChanged(nextStep:StepEnum, val: any) {
-    this.stateChanged.emit(new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep)));
+  
+  // StateChanged(nextStep:StepEnum, val: any) {
+  //   this.stateChanged.emit(new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep)));
+  // }
+
+  EmitStateChanged(stateChange:WizStateChange) {
+    this.stateChanged.emit(stateChange);
   }
 }

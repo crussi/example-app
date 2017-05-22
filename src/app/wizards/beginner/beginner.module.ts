@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { SharedModule  } from '../../shared';
 import { BaseComponent } from './base/base.component';
 import { Delegate } from './delegate/delegate.component';
 import { Done } from './done/done.component';
@@ -16,14 +17,15 @@ import { YesNo } from './yesno/yesno.component';
 import { ApproveChange } from './approvechange/approvechange.component';
 import { StepService } from './step.service';
 import { WizardDirective } from './wizard.directive';
-import { InboxItemProcessed } from './step.model';
+
 export const COMPONENTS = [BeginnerWizard];
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [
                 ApproveChange,

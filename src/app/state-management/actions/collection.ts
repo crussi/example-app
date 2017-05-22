@@ -61,6 +61,9 @@ export class RemoveBookFailAction implements Action {
  */
 export class LoadAction implements Action {
   readonly type = LOAD;
+  constructor(){
+    console.log('collection LoadAction');
+  }
 }
 
 export class LoadSuccessAction implements Action {

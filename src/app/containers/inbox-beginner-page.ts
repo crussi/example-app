@@ -15,8 +15,7 @@ import { InboxItem } from '../models/inbox';
   selector: 'bc-inbox-beginner-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <beginner-wizard [steps]="steps" 
-                  [inboxItem]="inboxItem" 
+  <beginner-wizard [inboxItem]="inboxItem" 
                   (onInboxItemProcessed)="onInboxItemProcessed($event)"
                   
                   ></beginner-wizard>    

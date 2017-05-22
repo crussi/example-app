@@ -29,7 +29,7 @@ export class Step {
     }    
 
     //Steps: StepOptions;
-    get Steps() : StepOptions {
+    get StepOptions() : StepOptions {
         return this.Settings.Steps;
     }    
     

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Step, StepSettings, StepOptions } from './step.model';
-import { StepEnum } from './step.enum';
+import { Step, StepSettings, StepOptions } from '../../shared/barrel';
+import { StepEnum } from '../../shared/barrel';
 import { YesNo } from './yesno/yesno.component';
 import { NextAction } from './nextaction/nextaction.component';
 import { NonActionable } from './nonactionable/nonactionable.component';
@@ -11,6 +11,7 @@ import { Delegate } from './delegate/delegate.component';
 import { Schedule } from './schedule/schedule.component';
 import { ApproveChange} from './approvechange/approvechange.component';
 import { Done } from './done/done.component';
+import { StepState } from '../../shared/barrel';
 
 @Injectable()
 export class StepService {
@@ -248,5 +249,14 @@ export class StepService {
     ]
   }
 
-
+  getStepStates() {
+      let stepStates: Array<StepState> = new Array<StepState>();
+      for (let item in StepEnum) {
+          if (!isNaN(Number(item))) {
+              //console.log('[' + item + '] = ' + StepEnum[item]);
+              stepStates.push(new StepState(StepEnum[item],undefined));
+          }
+      } 
+      return stepStates;   
+  }
 }

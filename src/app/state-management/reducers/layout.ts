@@ -12,7 +12,6 @@ const initialState: State = {
 export function reducer(state = initialState, action: layout.Actions): State {
   switch (action.type) {
     case layout.CLOSE_SIDENAV:
-      console.log('layout reducer');
       return {
         showSidenav: false
       };

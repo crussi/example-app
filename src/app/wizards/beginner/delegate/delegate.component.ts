@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseComponent } from '../base/base.component';
-import { StepEnum } from '../step.enum';
-// import { Store } from '@ngrx/store';
-// import * as fromRoot from '../../../state-management/reducers';
-// import * as test from '../../../state-management/actions/wizard';
+import { StepEnum, WizStateChange, StepTransition } from '../../../shared/barrel';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../state-management/reducers';
+import * as action from '../../../state-management/actions/wizard';
 
 @Component({
   selector: 'delegate',
@@ -27,7 +27,7 @@ import { StepEnum } from '../step.enum';
 })
 export class Delegate extends BaseComponent implements OnInit   {
 
-  constructor() { 
+  constructor(private store: Store<fromRoot.State>) { 
     super();
   }
 
@@ -41,5 +41,15 @@ export class Delegate extends BaseComponent implements OnInit   {
   Next(nextStep:StepEnum) {
     //this.store.dispatch(new test.WizardTestAction());
     //super.StateChanged(nextStep, {Delegate:"Donald Duck"});
+    let val = {Delegate:"Donald Duck"};
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
+    super.EmitStateChanged(stateChange);
+    this.store.dispatch(new action.StateChangeAction(stateChange));
+    
   }
+  StateChanged(nextStep:StepEnum, val:any) {
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
+    super.EmitStateChanged(stateChange);
+    this.store.dispatch(new action.StateChangeAction(stateChange));
+  }   
 }

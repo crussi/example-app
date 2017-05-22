@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MaterialModule } from '@angular/material';
 
 import { ComponentsModule } from './components';
+import { SharedModule  } from './shared';
 import { BeginnerModule } from './wizards/beginner/beginner.module';
 import { BookEffects } from './state-management/effects/book';
 import { CollectionEffects } from './state-management/effects/collection';
@@ -42,6 +43,7 @@ import { schema } from './db';
     MaterialModule,
     ComponentsModule,
     BeginnerModule,
+    SharedModule,
     RouterModule.forRoot(routes, { useHash: true }),
 
     /**
