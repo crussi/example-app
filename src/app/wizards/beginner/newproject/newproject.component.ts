@@ -32,13 +32,13 @@ export class NewProject extends BaseComponent implements OnInit   {
 
   ngOnInit() {
     super.ngOnInit();
-    console.log('ngOnInit');
+    console.log('newproject ngOnInit');
   }
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
+    console.log('newproject ngAfterViewInit');
   }
   ngAfterContentInit() {
-    console.log('ngAfterContentInit');
+    console.log('newproject ngAfterContentInit');
   }  
 
   Next(nextStep:StepEnum) {

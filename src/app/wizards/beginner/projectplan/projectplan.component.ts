@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { BaseComponent } from '../base/base.component';
-import { StepEnum, WizStateChange, StepTransition } from '../../../shared/barrel';
+import { StepEnum, WizStateChange, StepTransition, StepState } from '../../../shared/barrel';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../state-management/reducers';
 import * as action from '../../../state-management/actions/wizard';
@@ -23,19 +24,30 @@ import * as action from '../../../state-management/actions/wizard';
 })
 export class ProjectPlan extends BaseComponent implements OnInit   {
 
+  state$: Observable<StepState>;
   constructor(private store: Store<fromRoot.State>) { 
     super();
+    this.state$ = store.select(fromRoot.getSelectedStep);
+    console.log('--> projectplan:',this.state$);    
   }
 
   outcome: string;
   title: string;
   ngOnInit() {
     super.ngOnInit();
-    if (this.State) {
-      this.outcome = this.State.Outcome;
-      this.title = this.State.Title ;
-    } 
+    // if (this.State) {
+    //   this.outcome = this.State.Outcome;
+    //   this.title = this.State.Title ;
+    // } 
+    console.log('projectplan ngOnInit');
   }
+
+  ngAfterViewInit() {
+    console.log('projectplan ngAfterViewInit');
+  }
+  ngAfterContentInit() {
+    console.log('projectplan ngAfterContentInit');
+  }    
 
   Next(nextStep:StepEnum) {
     let val = {'Outcome':this.outcome, 'Title':this.title};
