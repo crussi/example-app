@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
@@ -19,13 +19,16 @@ import { Book } from '../models/book';
     </bc-book-detail>
   `
 })
-export class SelectedBookPageComponent {
+export class SelectedBookPageComponent implements OnInit  {
   book$: Observable<Book>;
   isSelectedBookInCollection$: Observable<boolean>;
 
   constructor(private store: Store<fromRoot.State>) {
     this.book$ = store.select(fromRoot.getSelectedBook);
     this.isSelectedBookInCollection$ = store.select(fromRoot.isSelectedBookInCollection);
+    console.log('selected-book-page',this.book$);
+  }
+  ngOnInit() {
   }
 
   addToCollection(book: Book) {

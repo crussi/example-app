@@ -14,10 +14,10 @@ import * as action from '../../../state-management/actions/wizard';
       <h3 *ngIf="hasQuestion">{{Question}}</h3>
       <p>Delegate controls go here ....</p>
         <ul>
-          <li>Donald Duck</li>
-          <li>Daffy Duck</li>
-          <li>Micky Mouse</li>
-          <li>Minnie Mouse</li>
+          <li (click)="DelegateTo('Donald Duck')">Donald Duck</li>
+          <li (click)="DelegateTo('Daffy Duck')">Daffy Duck</li>
+          <li (click)="DelegateTo('Micky Mouse')">Micky Mouse</li>
+          <li (click)="DelegateTo('Minnie Mouse')">Minnie Mouse</li>
         </ul>
       <button *ngIf="hasPrev" (click)="StateChanged(PrevStep,undefined)">Previous</button>
       <button *ngIf="hasNext" (click)="Next(NextStep)">Next</button>
@@ -27,21 +27,25 @@ import * as action from '../../../state-management/actions/wizard';
 })
 export class Delegate extends BaseComponent implements OnInit   {
 
+  state$: any;
   constructor(private store: Store<fromRoot.State>) { 
     super();
   }
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.State) {
-      
-    }
+    this.store.select(fromRoot.getSelectedStep).subscribe(stepState => this.state$ = stepState);
+  }
+
+  DelegateTo(delegate:string){
+    this.state$.Delegate = delegate;
   }
 
   Next(nextStep:StepEnum) {
     //this.store.dispatch(new test.WizardTestAction());
     //super.StateChanged(nextStep, {Delegate:"Donald Duck"});
-    let val = {Delegate:"Donald Duck"};
+    //let val = {Delegate:"Donald Duck"};
+    let val = {Delegate:this.state$.Delegate};
     let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
     super.EmitStateChanged(stateChange);
     this.store.dispatch(new action.StateChangeAction(stateChange));

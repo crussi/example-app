@@ -13,6 +13,7 @@ import * as action from '../../../state-management/actions/wizard';
       <h2 *ngIf="hasDeclaration">{{Declaration}}</h2>
       <h3 *ngIf="hasQuestion">{{Question}}</h3>
       <p>Refine action controls go here ....</p>
+      <input type="text" placeholder="Enter a refine action" [(ngModel)]="state$.RefineAction" >
 
       <button *ngIf="hasPrev" (click)="StateChanged(PrevStep,undefined)">Previous</button>
       <button *ngIf="hasNext" (click)="Next(NextStep)">Next</button>
@@ -25,14 +26,16 @@ export class RefineAction extends BaseComponent implements OnInit   {
   constructor(private store: Store<fromRoot.State>) { 
     super();
   }
+  state$: any;
 
   ngOnInit() {
     super.ngOnInit();
+    this.store.select(fromRoot.getSelectedStep).subscribe(stepState => this.state$ = stepState);    
   }
 
   Next(nextStep:StepEnum) {
     //super.StateChanged(nextStep, {'refineaction':'Refine action goes here'});
-    let val = {'refineaction':'Refine action goes here'};
+    let val = this.state$;
     let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
     super.EmitStateChanged(stateChange);
     this.store.dispatch(new action.StateChangeAction(stateChange));    

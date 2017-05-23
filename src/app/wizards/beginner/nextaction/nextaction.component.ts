@@ -12,7 +12,7 @@ import * as action from '../../../state-management/actions/wizard';
     <div>
       <h2 *ngIf="hasDeclaration">{{Declaration}}</h2>
       <h3 *ngIf="hasQuestion">{{Question}}</h3>
-      <input placeholder="Next action" [(ngModel)]="nextaction"/>
+      <input placeholder="Next action" [(ngModel)]="state$.NextAction"/>
 
       <button *ngIf="hasPrev" (click)="StateChanged(PrevStep,undefined)">Previous</button>
       <button *ngIf="hasNext" (click)="Next(NextStep)">Next</button>
@@ -25,21 +25,16 @@ export class NextAction extends BaseComponent implements OnInit   {
   constructor(private store: Store<fromRoot.State>) { 
     super();
   }
-
-  nextaction: string;
+  state$: any;
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.State) {
-      this.nextaction = this.State.NextAction;
-    } 
-    
+    this.store.select(fromRoot.getSelectedStep).subscribe(stepState => this.state$ = stepState);   
   }
 
   Next(nextStep:StepEnum) {
-    //super.StateChanged(nextStep, {'NextAction':this.nextaction});
-    let val = {'NextAction':this.nextaction};
-    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
+    //let val = this.state$;
+    let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, this.state$,new StepTransition(this.Settings.Name,nextStep));
     super.EmitStateChanged(stateChange);
     this.store.dispatch(new action.StateChangeAction(stateChange));    
   }

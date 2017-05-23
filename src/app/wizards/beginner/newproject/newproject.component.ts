@@ -26,8 +26,8 @@ export class NewProject extends BaseComponent implements OnInit   {
 
   constructor(private store: Store<fromRoot.State>) { 
     super();
-    this.state$ = store.select(fromRoot.getSelectedStep);
-    console.log('--> newproject:',this.state$);
+    //this.state$ = store.select(fromRoot.getSelectedStep);
+    //console.log('--> newproject:',this.state$);
   }
 
   ngOnInit() {

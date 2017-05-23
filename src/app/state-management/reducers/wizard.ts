@@ -70,6 +70,7 @@ export const getLoaded = (state: State) => state.loaded;
 export const getSelectedStep = (state: State) => state.selectedStep;
 
 export const getSelected = createSelector(getStepStates, getSelectedStep, (stepStates:Array<StepState>, selectedStep:StepEnum) => {
-  return stepStates[selectedStep].State;
+  console.log('wizard reducer getSelected: ');
+  return Object.assign({},stepStates[selectedStep].State);
 });
 

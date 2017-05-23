@@ -13,9 +13,9 @@ import * as action from '../../../state-management/actions/wizard';
       <h2 *ngIf="hasDeclaration">{{Declaration}}</h2>
       <h3 *ngIf="hasQuestion">{{Question}}</h3>
       <form #f="ngForm">
-        <input type="radio" name="nonactionable" [(ngModel)]="nonactionable" value="trash">Trash?<br>
-        <input type="radio" name="nonactionable" [(ngModel)]="nonactionable" value="someday">Someday/maybe?<br>
-        <input type="radio" name="nonactionable" [(ngModel)]="nonactionable" value="ref">Reference
+        <input type="radio" name="nonactionable" [(ngModel)]="this.state$.NonActionable" value="trash">Trash?<br>
+        <input type="radio" name="nonactionable" [(ngModel)]="this.state$.NonActionable" value="someday">Someday/maybe?<br>
+        <input type="radio" name="nonactionable" [(ngModel)]="this.state$.NonActionable" value="ref">Reference
       </form>      
 
       <button *ngIf="hasPrev" (click)="StateChanged(PrevStep,undefined)">Previous</button>
@@ -26,7 +26,8 @@ import * as action from '../../../state-management/actions/wizard';
 })
 export class NonActionable extends BaseComponent implements OnInit   {
 
-  nonactionable = "";
+  state$: any;
+  //nonactionable = "";
 
   constructor(private store: Store<fromRoot.State>) { 
     super();
@@ -34,14 +35,15 @@ export class NonActionable extends BaseComponent implements OnInit   {
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.State){
-      this.nonactionable = this.State;
-      console.log('nonactionable this.State ', this.State);
-    }
+    // if (this.State){
+    //   this.nonactionable = this.State;
+    //   console.log('nonactionable this.State ', this.State);
+    // }
+    this.store.select(fromRoot.getSelectedStep).subscribe(stepState => this.state$ = stepState);    
   }
 
   Next(nextStep:StepEnum) {
-    let val = this.nonactionable;
+    let val = {"NonActionable":this.state$.NonActionable};
     let stateChange:WizStateChange = new WizStateChange(this.Settings.Name, val,new StepTransition(this.Settings.Name,nextStep));
     super.EmitStateChanged(stateChange);
     this.store.dispatch(new action.StateChangeAction(stateChange));    
