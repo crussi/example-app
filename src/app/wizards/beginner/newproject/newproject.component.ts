@@ -26,14 +26,20 @@ export class NewProject extends BaseComponent implements OnInit   {
 
   constructor(private store: Store<fromRoot.State>) { 
     super();
-    this.state$ = store.select(fromRoot.getBookCollection);
-
+    this.state$ = store.select(fromRoot.getSelectedStep);
+    console.log('--> newproject:',this.state$);
   }
 
   ngOnInit() {
     super.ngOnInit();
-
+    console.log('ngOnInit');
   }
+  ngAfterViewInit() {
+    console.log('ngAfterViewInit');
+  }
+  ngAfterContentInit() {
+    console.log('ngAfterContentInit');
+  }  
 
   Next(nextStep:StepEnum) {
     //super.StateChanged(nextStep, {'hello':'world'});

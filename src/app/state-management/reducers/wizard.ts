@@ -1,13 +1,16 @@
+import { createSelector } from 'reselect';
 import * as wizard from '../../state-management/actions/wizard';
 import { StepState, StepEnum, WizStateChange } from '../../shared/barrel';
 export interface State {
   readonly loaded: boolean;
   //readonly stepStates: StepState[];
+  readonly selectedStep: StepEnum;
   readonly stepStates: Array<StepState>;
 }
 
 const initialState: State = {
   loaded: false,
+  selectedStep: undefined,
   stepStates:[]
 };
 
@@ -45,6 +48,7 @@ export function reducer(state = initialState, action: wizard.Actions): State {
       //console.log('wizard STATECHANGE prev state',state);
       let obj = Object.assign({}, state, {
         loaded: true,
+        selectedStep: s.Transition.to,
         stepStates: state.stepStates.slice(0,idx).concat(new StepState(name,s.Value))
         .concat(state.stepStates.slice(idx+1)) 
         }
@@ -58,8 +62,14 @@ export function reducer(state = initialState, action: wizard.Actions): State {
 }
 
 //export const getTest = (state: State) => state.test;
+export const getStepStates = (state: State) => state.stepStates;
 
 export const getLoaded = (state: State) => state.loaded;
 
 //export const getLoading = (state: State) => state.loading;
+export const getSelectedStep = (state: State) => state.selectedStep;
+
+export const getSelected = createSelector(getStepStates, getSelectedStep, (stepStates:Array<StepState>, selectedStep:StepEnum) => {
+  return stepStates[selectedStep].State;
+});
 

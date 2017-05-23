@@ -103,6 +103,8 @@ export function reducer(state: any, action: any) {
  */
 export const getBooksState = (state: State) => state.books;
 
+export const getStepsState = (state: State) => state.wizard;
+
 /**
  * Every reducer module exports selector functions, however child reducers
  * have no knowledge of the overall state tree. To make them useable, we
@@ -117,6 +119,8 @@ export const getBooksState = (state: State) => state.books;
  export const getBookIds = createSelector(getBooksState, fromBooks.getIds);
  export const getSelectedBookId = createSelector(getBooksState, fromBooks.getSelectedId);
  export const getSelectedBook = createSelector(getBooksState, fromBooks.getSelected);
+
+ export const getSelectedStep = createSelector(getStepsState, fromWizard.getSelected);
 
 
 /**
