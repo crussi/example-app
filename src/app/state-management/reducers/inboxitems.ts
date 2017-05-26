@@ -18,10 +18,11 @@ export const initialState: State = {
 
 export function reducer(state = initialState, action: inboxItem.Actions | collection.Actions): State {
   switch (action.type) {
+    //case collection.LOAD_SUCCESS:
     case inboxItem.SEARCH_COMPLETE:
-    case collection.LOAD_SUCCESS: {
-      const inboxItem = action.payload;
-      const newInboxItems = inboxItem.filter(inboxItem => !state.entities[inboxItem.id]);
+     {
+      const inboxItems:InboxItem[] = action.payload;
+      const newInboxItems = inboxItems.filter(inboxItem => !state.entities[inboxItem.id]);
 
       const newInboxItemIds = newInboxItems.map(inboxItem => inboxItem.id);
       const newInboxItemEntities = newInboxItems.reduce((entities: { [id: string]: InboxItem }, inboxItem: InboxItem) => {

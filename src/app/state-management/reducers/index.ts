@@ -3,7 +3,7 @@ import { ActionReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../../environments/environment';
 import { StepEnum, InboxItem } from '../../shared/barrel'
-import { } from '../../models/book'
+import { Book } from '../../models/book'
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -140,6 +140,7 @@ export const getStepsState = (state: State) => state.wizard;
 export const getSearchState = (state: State) => state.search;
 
 export const getSearchBookIds = createSelector(getSearchState, fromSearch.getIds);
+export const getSearchInboxItemIds = createSelector(getSearchState, fromSearch.getIds);
 export const getSearchQuery = createSelector(getSearchState, fromSearch.getQuery);
 export const getSearchLoading = createSelector(getSearchState, fromSearch.getLoading);
 
@@ -152,6 +153,9 @@ export const getSearchResults = createSelector(getBookEntities, getSearchBookIds
   return searchIds.map(id => books[id]);
 });
 
+export const getInboxItems = createSelector(getInboxItemEntities, getInboxItemIds, (inboxitems, ids) => {
+  return ids.map(id => inboxitems[id]);
+});
 
 
 export const getCollectionState = (state: State) => state.collection;

@@ -15,6 +15,7 @@ import { ComponentsModule } from './components';
 import { SharedModule  } from './shared';
 import { BeginnerModule } from './wizards/beginner/beginner.module';
 import { BookEffects } from './state-management/effects/book';
+import { InboxItemEffects } from './state-management/effects/inboxitem';
 import { CollectionEffects } from './state-management/effects/collection';
 import { BookExistsGuard } from './guards/book-exists';
 
@@ -80,6 +81,7 @@ import { schema } from './db';
      * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
      */
     EffectsModule.run(BookEffects),
+    EffectsModule.run(InboxItemEffects),
     EffectsModule.run(CollectionEffects),
 
     /**

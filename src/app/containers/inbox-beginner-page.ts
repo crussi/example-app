@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromRoot from '../state-management/reducers';
 import { InboxService } from '../services/inbox.service';
-import { InboxItem } from '../models/inbox';
+import { InboxItem } from '../shared/barrel';
 //import * as book from '../state-management/actions/book';
 //import { Book } from '../models/book';
 
@@ -24,33 +24,45 @@ import { InboxItem } from '../models/inbox';
 export class InboxBeginnerPageComponent implements OnInit {
   //searchQuery$: Observable<string>;
   //books$: Observable<Book[]>;
+  inboxItems$: Observable<InboxItem[]>;
   //loading$: Observable<boolean>;
-  steps:any = {};
+  //steps:any = {};
   inboxItem:any = {};
-  inboxItems: InboxItem[];
+  //inboxItems: InboxItem[];
   index = 0;
 
   constructor(private store: Store<fromRoot.State>,
               private inboxService: InboxService) {
     //this.searchQuery$ = store.select(fromRoot.getSearchQuery).take(1);
     //this.books$ = store.select(fromRoot.getSearchResults);
+    this.inboxItems$ = store.select(fromRoot.getInboxItems);
     //this.loading$ = store.select(fromRoot.getSearchLoading);
+    
   }
 
   ngOnInit() {
-    this.inboxItems = this.inboxService.getInboxItems();
-    if (this.inboxItems.length) {
-      this.inboxItem = this.inboxItems[this.index];
-    }    
+    //this.inboxService.getInboxItems().subscribe(ary => this.inboxItems = ary);
+    
+    // if (this.inboxItems.length) {
+    //   this.inboxItem = this.inboxItems[this.index];
+    // }    
+    this.getNextItem();
   }
 
   onInboxItemProcessed(event:any){
-    console.log('app.component done!',event);
-    if (++this.index <= this.steps.length) {
-      console.log('set new inboxItem');
-      this.inboxItem = this.inboxItems[this.index];
-    }
+    this.getNextItem();
   }  
+
+  private getNextItem() {
+    console.log('getNextItem');
+    this.inboxItems$.subscribe(items => {
+      console.log('getNextItem subscribe =>');
+      if (++this.index <= items.length) {
+        this.inboxItem = items[this.index];
+        console.log('inbox-beginner-page this.inboxItem',this.inboxItem);
+      }
+    });    
+  }
 
 //   search(query: string) {
 //     this.store.dispatch(new book.SearchAction(query));

@@ -14,7 +14,7 @@ import { of } from 'rxjs/observable/of';
 //import { GoogleBooksService } from '../../services/google-books';
 import { InboxService } from '../../services/inbox.service';
 import * as inboxitem from '../actions/inboxitem';
-
+import { InboxItem } from '../../shared/barrel';
 
 /**
  * Effects offer a way to isolate and easily test side-effects within your

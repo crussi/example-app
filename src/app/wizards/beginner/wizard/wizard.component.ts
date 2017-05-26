@@ -40,7 +40,6 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   ngOnInit(){
     let stepStates: Array<StepState> = this.stepService.getStepStates();
     this.store.dispatch(new action.LoadAction(stepStates));
-    this.store.dispatch(new inboxitem.SearchAction(""));
   }
   ngAfterViewInit() {
   }
@@ -54,6 +53,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.inboxItem) {
+      console.log('wizard.component ngOnChanges',changes.inboxItem);
       this.initialize();
     }
   }  

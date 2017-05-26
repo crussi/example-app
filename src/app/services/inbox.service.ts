@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { InboxItem } from '../models/inbox';
+import { Observable } from 'rxjs/Observable';
+import { InboxItem } from '../shared/barrel';
 
 @Injectable()
 export class InboxService {
 
   constructor() { }
 
-  getInboxItems() {
-    return [
-      new InboxItem("Remember to buy milk",new Date(2017,5,15),"Chris"),
-      new InboxItem("Buy postage stamps",new Date(2017,5,15),"Michele"),
-      new InboxItem("Order drum set",new Date(2017,5,15),"Isaac"),
-      new InboxItem("Fertilize the yard",new Date(2017,5,15),"Chris"),
+  getInboxItems():Observable<InboxItem[]> {
+    var list = [
+      new InboxItem("1","Remember to buy milk",new Date(2017,5,15),"Chris"),
+      new InboxItem("2","Buy postage stamps",new Date(2017,5,15),"Michele"),
+      new InboxItem("3","Order drum set",new Date(2017,5,15),"Isaac"),
+      new InboxItem("4","Fertilize the yard",new Date(2017,5,15),"Chris"),
 
     ]
+    return Observable.of(list)
   }
 
 }
