@@ -2,7 +2,8 @@ import { createSelector } from 'reselect';
 import { ActionReducer } from '@ngrx/store';
 import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../../environments/environment';
-import { StepEnum } from '../../shared/barrel'
+import { StepEnum, InboxItem } from '../../shared/barrel'
+import { } from '../../models/book'
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
  * it any number of functions and it returns a function. This new function
@@ -39,6 +40,7 @@ import { combineReducers } from '@ngrx/store';
  */
 import * as fromSearch from './search';
 import * as fromBooks from './books';
+import * as fromInboxItems from './inboxitems';
 import * as fromCollection from './collection';
 import * as fromLayout from './layout';
 import * as fromWizard from './wizard';
@@ -51,6 +53,7 @@ import * as fromWizard from './wizard';
 export interface State {
   search: fromSearch.State;
   books: fromBooks.State;
+  inboxitems: fromInboxItems.State;
   collection: fromCollection.State;
   layout: fromLayout.State;
   wizard: fromWizard.State;
@@ -68,6 +71,7 @@ export interface State {
 const reducers = {
   search: fromSearch.reducer,
   books: fromBooks.reducer,
+  inboxitems: fromInboxItems.reducer,
   collection: fromCollection.reducer,
   layout: fromLayout.reducer,
   wizard: fromWizard.reducer,
@@ -103,6 +107,8 @@ export function reducer(state: any, action: any) {
  */
 export const getBooksState = (state: State) => state.books;
 
+export const getInboxItemsState = (state: State) => state.inboxitems;
+
 export const getStepsState = (state: State) => state.wizard;
 
 /**
@@ -116,9 +122,13 @@ export const getStepsState = (state: State) => state.wizard;
  * pieces of state.
  */
  export const getBookEntities = createSelector(getBooksState, fromBooks.getEntities);
+ export const getInboxItemEntities = createSelector(getInboxItemsState, fromInboxItems.getEntities);
  export const getBookIds = createSelector(getBooksState, fromBooks.getIds);
+ export const getInboxItemIds = createSelector(getInboxItemsState, fromInboxItems.getIds);
  export const getSelectedBookId = createSelector(getBooksState, fromBooks.getSelectedId);
+ export const getSelectedInboxItemId = createSelector(getInboxItemsState, fromInboxItems.getSelectedId);
  export const getSelectedBook = createSelector(getBooksState, fromBooks.getSelected);
+ export const getSelectedInboxItem = createSelector(getInboxItemsState, fromInboxItems.getSelected);
 
  export const getSelectedStep = createSelector(getStepsState, fromWizard.getSelected);
 

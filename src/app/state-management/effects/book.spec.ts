@@ -6,7 +6,7 @@ import { BookEffects } from './book';
 import { GoogleBooksService } from '../../services/google-books';
 import { Observable } from 'rxjs/Observable';
 import { SearchAction, SearchCompleteAction } from '../actions/book';
-import { Book } from '../../models/book';
+import { InboxItem } from '../../models/book';
 
 describe('BookEffects', () => {
   beforeEach(() => TestBed.configureTestingModule({
@@ -36,8 +36,8 @@ describe('BookEffects', () => {
 
   describe('search$', () => {
     it('should return a new book.SearchCompleteAction, with the books, on success, after the de-bounce', fakeAsync(() => {
-      const book1 = {id: '111', volumeInfo: {}} as Book;
-      const book2 = {id: '222', volumeInfo: {}} as Book;
+      const book1 = {id: '111', volumeInfo: {}} as InboxItem;
+      const book2 = {id: '222', volumeInfo: {}} as InboxItem;
       const books = [book1, book2];
 
       const {runner, bookEffects} = setup({searchBooksReturnValue: Observable.of(books)});

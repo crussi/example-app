@@ -8,6 +8,7 @@ import { StepService } from '../step.service';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../state-management/reducers';
 import * as action from '../../../state-management/actions/wizard';
+import * as inboxitem from '../../../state-management/actions/inboxitem';
 
 @Component({
   selector: 'beginner-wizard',
@@ -39,6 +40,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   ngOnInit(){
     let stepStates: Array<StepState> = this.stepService.getStepStates();
     this.store.dispatch(new action.LoadAction(stepStates));
+    this.store.dispatch(new inboxitem.SearchAction(""));
   }
   ngAfterViewInit() {
   }

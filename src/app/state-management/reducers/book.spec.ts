@@ -1,7 +1,7 @@
 import { reducer } from './books';
 import * as fromBooks from './books';
 import { SearchCompleteAction, LoadAction, SelectAction } from '../../state-management/actions/book';
-import { Book } from '../../models/book';
+import { InboxItem } from '../../models/book';
 import { LoadSuccessAction } from '../../state-management/actions/collection';
 
 describe('BooksReducer', () => {
@@ -16,8 +16,8 @@ describe('BooksReducer', () => {
 
   describe('SEARCH_COMPLETE & LOAD_SUCCESS', () => {
     function noExistingBooks(action) {
-      const book1 = {id: '111'} as Book;
-      const book2 = {id: '222'} as Book;
+      const book1 = {id: '111'} as InboxItem;
+      const book2 = {id: '222'} as InboxItem;
       const createAction = new action([book1, book2]);
 
       const expectedResult = {
@@ -34,8 +34,8 @@ describe('BooksReducer', () => {
     }
 
     function existingBooks(action) {
-      const book1 = {id: '111'} as Book;
-      const book2 = {id: '222'} as Book;
+      const book1 = {id: '111'} as InboxItem;
+      const book2 = {id: '222'} as InboxItem;
       const initialState = {
         ids: ['111', '222'],
         entities: {
@@ -46,7 +46,7 @@ describe('BooksReducer', () => {
       } as any;
       // should not replace existing books
       const differentBook2 = {id: '222', foo: 'bar'} as any;
-      const book3 = {id: '333'} as Book;
+      const book3 = {id: '333'} as InboxItem;
       const createAction = new action([book3, differentBook2]);
 
       const expectedResult = {
@@ -76,7 +76,7 @@ describe('BooksReducer', () => {
 
   describe('LOAD', () => {
     it('should add a single book, if the book does not exist', () => {
-      const book = {id: '888'} as Book;
+      const book = {id: '888'} as InboxItem;
       const action = new LoadAction(book);
 
       const expectedResult = {
@@ -116,8 +116,8 @@ describe('BooksReducer', () => {
   });
 
   describe('Selections', () => {
-    const book1 = {id: '111'} as Book;
-    const book2 = {id: '222'} as Book;
+    const book1 = {id: '111'} as InboxItem;
+    const book2 = {id: '222'} as InboxItem;
     const state: fromBooks.State = {
       ids: ['111', '222'],
       entities: {

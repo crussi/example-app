@@ -4,7 +4,7 @@ import { EffectsTestingModule, EffectsRunner } from '@ngrx/effects/testing';
 import { TestBed } from '@angular/core/testing';
 import { CollectionEffects } from './collection';
 import { Database } from '@ngrx/db';
-import { Book } from '../../models/book';
+import { InboxItem } from '../../models/book';
 import * as collection from '../actions/collection';
 import { Observable } from 'rxjs/Observable';
 
@@ -40,8 +40,8 @@ describe('CollectionEffects', () => {
 
   describe('loadCollection$', () => {
     it('should return a collection.LoadSuccessAction, with the books, on success', () => {
-      const book1 = {id: '111', volumeInfo: {}} as Book;
-      const book2 = {id: '222', volumeInfo: {}} as Book;
+      const book1 = {id: '111', volumeInfo: {}} as InboxItem;
+      const book2 = {id: '222', volumeInfo: {}} as InboxItem;
 
       const {db, runner, collectionEffects} = setup();
 
@@ -75,7 +75,7 @@ describe('CollectionEffects', () => {
 
   describe('addBookToCollection$', () => {
     it('should return a collection.AddBookSuccessAction, with the book, on success', () => {
-      const book = {id: '111', volumeInfo: {}} as Book;
+      const book = {id: '111', volumeInfo: {}} as InboxItem;
 
       const {db, runner, collectionEffects} = setup();
       db.insert.and.returnValue(Observable.of({}));
@@ -91,7 +91,7 @@ describe('CollectionEffects', () => {
     });
 
     it('should return a collection.AddBookFailAction, with the book, when the db insert throws', () => {
-      const book = {id: '111', volumeInfo: {}} as Book;
+      const book = {id: '111', volumeInfo: {}} as InboxItem;
 
       const {db, runner, collectionEffects} = setup();
       db.insert.and.returnValue(Observable.throw(new Error()));
@@ -108,7 +108,7 @@ describe('CollectionEffects', () => {
 
     describe('removeBookFromCollection$', () => {
       it('should return a collection.RemoveBookSuccessAction, with the book, on success', () => {
-        const book = {id: '111', volumeInfo: {}} as Book;
+        const book = {id: '111', volumeInfo: {}} as InboxItem;
 
         const {db, runner, collectionEffects} = setup();
         db.executeWrite.and.returnValue(Observable.of({}));
@@ -124,7 +124,7 @@ describe('CollectionEffects', () => {
       });
 
       it('should return a collection.RemoveBookFailAction, with the book, when the db insert throws', () => {
-        const book = {id: '111', volumeInfo: {}} as Book;
+        const book = {id: '111', volumeInfo: {}} as InboxItem;
 
         const {db, runner, collectionEffects} = setup();
         db.executeWrite.and.returnValue(Observable.throw(new Error()));
