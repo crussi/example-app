@@ -9,6 +9,7 @@ export class LoadAction implements Action {
   readonly type = LOAD;
   constructor(public payload: Array<StepState>) {
     //console.log('Wizard LoadAction payload: ',payload);
+    
    }
 }
 export class StateChangeAction implements Action {

@@ -17,7 +17,9 @@ export const SELECT =           '[InboxItem] Select';
 export class SearchAction implements Action {
   readonly type = SEARCH;
 
-  constructor(public payload: string) { }
+  constructor(public payload: string) { 
+    //console.log('inboxitem SearchAction',payload);
+  }
 }
 
 export class SearchCompleteAction implements Action {
@@ -35,7 +37,8 @@ export class LoadAction implements Action {
 export class SelectAction implements Action {
   readonly type = SELECT;
 
-  constructor(public payload: string) { }
+  //constructor(public payload: string) { }
+  constructor() { }
 }
 
 /**

@@ -9,14 +9,15 @@ import { InboxService } from '../services/inbox.service';
 import { InboxItem } from '../shared/barrel';
 //import * as book from '../state-management/actions/book';
 //import { Book } from '../models/book';
+import * as action from '../state-management/actions/inboxitem';
 
 
 @Component({
   selector: 'bc-inbox-beginner-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-  <beginner-wizard [inboxItem]="inboxItem" 
-                  (onInboxItemProcessed)="onInboxItemProcessed($event)"
+  <beginner-wizard [inboxItem]="inboxItem$ | async" 
+                  (onInboxItemProcessed)="onInboxItemProcessed()"
                   
                   ></beginner-wizard>    
   `
@@ -24,18 +25,20 @@ import { InboxItem } from '../shared/barrel';
 export class InboxBeginnerPageComponent implements OnInit {
   //searchQuery$: Observable<string>;
   //books$: Observable<Book[]>;
-  inboxItems$: Observable<InboxItem[]>;
+  //inboxItems$: Observable<InboxItem[]>;
   //loading$: Observable<boolean>;
   //steps:any = {};
-  inboxItem:any = {};
+  //inboxItem:any = {};
+  inboxItem$: Observable<InboxItem>;
   //inboxItems: InboxItem[];
   index = 0;
-
+  test: InboxItem;
   constructor(private store: Store<fromRoot.State>,
               private inboxService: InboxService) {
     //this.searchQuery$ = store.select(fromRoot.getSearchQuery).take(1);
     //this.books$ = store.select(fromRoot.getSearchResults);
-    this.inboxItems$ = store.select(fromRoot.getInboxItems);
+    //this.store.dispatch(new action.SearchAction(""));
+    //this.store.dispatch(new action.SelectAction("1"));
     //this.loading$ = store.select(fromRoot.getSearchLoading);
     
   }
@@ -45,24 +48,19 @@ export class InboxBeginnerPageComponent implements OnInit {
     
     // if (this.inboxItems.length) {
     //   this.inboxItem = this.inboxItems[this.index];
-    // }    
-    this.getNextItem();
+    // }  
+    //console.log('fromRoot.getSelectedInboxItem:',fromRoot.getSelectedInboxItem);
+    this.inboxItem$ = this.store.select(fromRoot.getSelectedInboxItem);
+    //this.store.select(fromRoot.getSelectedInboxItem).subscribe(x => {this.test = x; console.log('this.test: ',this.test)});
+    //console.log('inbox-beginner-page ctr this.inboxItem$',this.inboxItem$);
   }
 
-  onInboxItemProcessed(event:any){
-    this.getNextItem();
+  onInboxItemProcessed(){
+    console.log('******** emit new inboxitem.SelectAction ********');
+    this.store.dispatch(new action.SelectAction());
   }  
 
-  private getNextItem() {
-    console.log('getNextItem');
-    this.inboxItems$.subscribe(items => {
-      console.log('getNextItem subscribe =>');
-      if (++this.index <= items.length) {
-        this.inboxItem = items[this.index];
-        console.log('inbox-beginner-page this.inboxItem',this.inboxItem);
-      }
-    });    
-  }
+
 
 //   search(query: string) {
 //     this.store.dispatch(new book.SearchAction(query));

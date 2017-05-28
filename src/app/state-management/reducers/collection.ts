@@ -16,7 +16,7 @@ const initialState: State = {
 export function reducer(state = initialState, action: collection.Actions): State {
   switch (action.type) {
     case collection.LOAD: {
-      console.log('collection LOAD');
+      //console.log('collection LOAD');
       return Object.assign({}, state, {
         loading: true
       });
@@ -24,7 +24,7 @@ export function reducer(state = initialState, action: collection.Actions): State
 
     case collection.LOAD_SUCCESS: {
       const books = action.payload;
-      console.log('collection LOAD_SUCCESS');
+      //console.log('collection LOAD_SUCCESS');
 
       return {
         loaded: true,

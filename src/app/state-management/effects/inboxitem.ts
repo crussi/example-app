@@ -36,18 +36,24 @@ import { InboxItem } from '../../shared/barrel';
 @Injectable()
 export class InboxItemEffects {
 
+  /**
+   * This effect makes use of the `startWith` operator to trigger
+   * the effect immediately on startup.
+   */
+
   @Effect()
   search$: Observable<Action> = this.actions$
     .ofType(inboxitem.SEARCH)
+    .startWith(new inboxitem.SearchAction(""))
     .debounceTime(300)
     .map(toPayload)
     .switchMap(query => {
-      if (query === '') {
-        return empty();
-      }
+      // if (query === '') {
+      //   return empty();
+      // }
 
       const nextSearch$ = this.actions$.ofType(inboxitem.SEARCH).skip(1);
-      console.log('Effects before getInboxItems');
+      //console.log('Effects before getInboxItems',this.inboxService.getInboxItems());
       return this.inboxService.getInboxItems()
         //.takeUntil(nextSearch$)
         .map(inboxitems => new inboxitem.SearchCompleteAction(inboxitems))

@@ -18,13 +18,14 @@ export function reducer(state = initialState, action: wizard.Actions): State {
   switch (action.type) {
     case wizard.LOAD: {
       const s = action.payload;
+      
       //console.log('wizard.LOAD',s);
       //console.log('wizard LOAD prev state',state);
       let obj = Object.assign({}, state, {
         loaded: true,
         stepStates: s.map(ss => ss)
       });  
-      console.log('wizard LOAD new state',obj);
+      //console.log('wizard LOAD new state',obj);
       return obj;
     }
 
@@ -53,7 +54,7 @@ export function reducer(state = initialState, action: wizard.Actions): State {
         .concat(state.stepStates.slice(idx+1)) 
         }
       );  
-      console.log('wizard STATECHANGE new state',obj);
+      //console.log('wizard STATECHANGE new state',obj);
       return obj;
 
     default:
@@ -70,7 +71,8 @@ export const getLoaded = (state: State) => state.loaded;
 export const getSelectedStep = (state: State) => state.selectedStep;
 
 export const getSelected = createSelector(getStepStates, getSelectedStep, (stepStates:Array<StepState>, selectedStep:StepEnum) => {
-  console.log('wizard reducer getSelected: ');
+  //console.log('wizard reducer getSelected: ',selectedStep);
+  //console.log('wizard reducer getSelected: ',stepStates[selectedStep].State);
   return Object.assign({},stepStates[selectedStep].State);
 });
 

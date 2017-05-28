@@ -6,7 +6,8 @@ export class InboxItem {
 }
 
 export class InboxItemProcessed {    
-    constructor(public State:WizState) {}
+    //constructor(public State:WizState) {}
+    constructor() {}
 }
 
 

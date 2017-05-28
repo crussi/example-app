@@ -41,6 +41,7 @@ export class BookEffects {
     .debounceTime(300)
     .map(toPayload)
     .switchMap(query => {
+      //console.log('inside book effects');
       if (query === '') {
         return empty();
       }

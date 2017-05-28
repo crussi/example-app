@@ -8,12 +8,16 @@ export interface State {
   ids: string[];
   entities: { [id: string]: InboxItem };
   selectedInboxItemId: string | null;
+  count: number;
+  index: number;
 };
 
 export const initialState: State = {
   ids: [],
   entities: {},
-  selectedInboxItemId: null,
+  selectedInboxItemId: "1",
+  count: 0,
+  index: 1
 };
 
 export function reducer(state = initialState, action: inboxItem.Actions | collection.Actions): State {
@@ -21,6 +25,7 @@ export function reducer(state = initialState, action: inboxItem.Actions | collec
     //case collection.LOAD_SUCCESS:
     case inboxItem.SEARCH_COMPLETE:
      {
+       console.log('*** inboxItem.SEARCH_COMPLETE ***');
       const inboxItems:InboxItem[] = action.payload;
       const newInboxItems = inboxItems.filter(inboxItem => !state.entities[inboxItem.id]);
 
@@ -31,34 +36,62 @@ export function reducer(state = initialState, action: inboxItem.Actions | collec
         });
       }, {});
 
-      return {
+      // console.log('inboxitem reducer return {}',{
+      //   ids: [ ...state.ids, ...newInboxItemIds ],
+      //   entities: Object.assign({}, state.entities, newInboxItemEntities),
+      //   selectedInboxItemId: state.selectedInboxItemId
+      // });
+
+      let s = {
         ids: [ ...state.ids, ...newInboxItemIds ],
         entities: Object.assign({}, state.entities, newInboxItemEntities),
-        selectedInboxItemId: state.selectedInboxItemId
+        selectedInboxItemId: state.selectedInboxItemId,
+        count: inboxItems.length,
+        index: state.index
       };
+      console.log('*** inboxItem.SEARCH_COMPLETE will return ***',s);
+      return s; 
     }
 
-    case inboxItem.LOAD: {
-      const inboxItem = action.payload;
+    // case inboxItem.LOAD: {
+    //   const inboxItem = action.payload;
 
-      if (state.ids.indexOf(inboxItem.id) > -1) {
-        return state;
-      }
+    //   if (state.ids.indexOf(inboxItem.id) > -1) {
+    //     console.log('LOAD (1)');
+    //     return state;
+    //   }
+    //   console.log('LOAD (2)');
 
-      return {
-        ids: [ ...state.ids, inboxItem.id ],
-        entities: Object.assign({}, state.entities, {
-          [inboxItem.id]: inboxItem
-        }),
-        selectedInboxItemId: state.selectedInboxItemId
-      };
-    }
+    //   return {
+    //     ids: [ ...state.ids, inboxItem.id ],
+    //     entities: Object.assign({}, state.entities, {
+    //       [inboxItem.id]: inboxItem
+    //     }),
+    //     selectedInboxItemId: state.entities[state.index].id,
+    //     count: state.count,
+    //     index: state.index
+    //   };
+    // }
 
     case inboxItem.SELECT: {
+      //TODO: if we get to then end signal we're done!
+      let i = state.index;
+      //console.log('b4 inboxItem.SELECT i:',i);
+      i = Math.min(++i,state.count);
+      //console.log('af inboxItem.SELECT i:',i);
+      console.log('inboxItem.SELECT state will be: ', {
+        ids: state.ids,
+        entities: state.entities,
+        selectedInboxItemId: state.entities[i].id,
+        count: state.count,
+        index : i
+      });
       return {
         ids: state.ids,
         entities: state.entities,
-        selectedInboxItemId: action.payload
+        selectedInboxItemId: state.entities[i].id,
+        count: state.count,
+        index : i
       };
     }
 
@@ -84,6 +117,9 @@ export const getIds = (state: State) => state.ids;
 export const getSelectedId = (state: State) => state.selectedInboxItemId;
 
 export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) => {
+  //console.log('inside inboxitem reducer selectedId',selectedId);
+  //console.log('inside inboxitem reducer entities',entities);
+  //console.log('inside inboxitem reducer entities[selectedId]',entities[selectedId]);
   return entities[selectedId];
 });
 

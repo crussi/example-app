@@ -63,7 +63,7 @@ export class RemoveInboxItemFailAction implements Action {
 export class LoadAction implements Action {
   readonly type = LOAD;
   constructor(){
-    console.log('collection LoadAction');
+    //console.log('collection LoadAction');
   }
 }
 

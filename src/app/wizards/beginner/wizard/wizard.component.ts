@@ -10,11 +10,12 @@ import * as fromRoot from '../../../state-management/reducers';
 import * as action from '../../../state-management/actions/wizard';
 import * as inboxitem from '../../../state-management/actions/inboxitem';
 
+
 @Component({
   selector: 'beginner-wizard',
   template: `
               <div class="ad-banner">
-                <h3 *ngIf="displayDesc">{{inboxItem.Description}}</h3>
+                <h3 *ngIf="displayDesc">{{Description}}</h3>
                 <ng-template wizard-host></ng-template>                
               </div>
             `
@@ -32,19 +33,23 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   interval: any;
   displayDesc = true;
 
+  get Description() {
+    return this.inboxItem ? this.inboxItem.Description : '';
+  }  
+
   constructor(
     private _componentFactoryResolver: ComponentFactoryResolver,
     private stepService: StepService,
     private store: Store<fromRoot.State>) { }
 
   ngOnInit(){
-    let stepStates: Array<StepState> = this.stepService.getStepStates();
-    this.store.dispatch(new action.LoadAction(stepStates));
+
   }
   ngAfterViewInit() {
   }
   ngAfterContentInit() {
-    this.initialize();
+    //console.log('called from ngAfterContentInit');
+    //this.initialize();
   }
 
   ngOnDestroy() {
@@ -54,6 +59,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
   ngOnChanges(changes: SimpleChanges) {
     if (changes.inboxItem) {
       console.log('wizard.component ngOnChanges',changes.inboxItem);
+      //console.log('called from ngOnChanges');
       this.initialize();
     }
   }  
@@ -62,11 +68,15 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
     if (!this.steps) {
       this.steps = this.stepService.getSteps();
     }
+    console.log('initialize step states');
+    let stepStates: Array<StepState> = this.stepService.getStepStates();
+    this.store.dispatch(new action.LoadAction(stepStates));
+    console.log('load IsActionable');
     this.loadComponent(new StepTransition(StepEnum.Start,StepEnum.IsActionable));
   }
 
   stateChanged(stateChange:WizStateChange) {
-    //console.log('wiz stateChanged: ' + StepEnum[stateChange.Step], stateChange.Value);
+    console.log('wiz stateChanged: ' + StepEnum[stateChange.Step], stateChange.Value);
 
     //this.State.update(stateChange);
     //console.dir(this.State);
@@ -74,7 +84,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
 
     switch (stateChange.Transition.to) {
       case StepEnum.Navigate:
-        console.log('wizard navigate from here');
+        //console.log('wizard navigate from here');
         break;
       case StepEnum.Done:
         console.log('Done hide description');
@@ -83,20 +93,20 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
         break;
       case StepEnum.Next:
         console.log('wizard is done, process next inbox item');
-        //this.onInboxItemProcessed.emit(new InboxItemProcessed(this.State));
+        this.onInboxItemProcessed.emit(new InboxItemProcessed());
         break;
       case StepEnum.Exit:
         console.log('exit wizard');        
         break;
     }
 
-    console.log('calling loadComponent from stateChanged');
+    //console.log('calling loadComponent from stateChanged');
     this.loadComponent(stateChange.Transition);
   }
 
   private loadComponent(stepTransition:StepTransition) {
     //console.log('loadComponent ' + stepTransition.to + ' ads.length: ' + this.ads.length);
-    //console.log('stepTransition.to: ' + stepTransition.to);
+    console.log('stepTransition.to: ',stepTransition);
     
     //Find step component to load and load it
     if (!this.steps || !this.steps.length) {
@@ -105,7 +115,7 @@ export class BeginnerWizard implements AfterViewInit, OnDestroy, OnInit, OnChang
     }
     for (let i = 0; i < this.steps.length; i++) {
         if (this.steps[i].Name == stepTransition.to) {
-          //console.log('found match:')
+          console.log('found match:')
           let step: Step = this.steps[i];
           switch (step.Name) {
             case StepEnum.ApproveChange:
