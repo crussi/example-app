@@ -5,6 +5,7 @@ import { FindBookPageComponent } from './containers/find-book-page';
 import { InboxBeginnerPageComponent } from './containers/inbox-beginner-page';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
+import { CollectionInboxItemPageComponent } from './containers/collection-inboxitem-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
 
 export const routes: Routes = [
@@ -12,6 +13,10 @@ export const routes: Routes = [
     path: '',
     component: CollectionPageComponent
   },
+  {
+    path: 'inbox',
+    component: CollectionInboxItemPageComponent
+  },  
   {
     path: 'book/find',
     component: FindBookPageComponent

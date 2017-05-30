@@ -42,6 +42,7 @@ import * as fromSearch from './search';
 import * as fromBooks from './books';
 import * as fromInboxItems from './inboxitems';
 import * as fromCollection from './collection';
+import * as fromCollectionInboxItem from './collection-inboxitem';
 import * as fromLayout from './layout';
 import * as fromWizard from './wizard';
 
@@ -55,6 +56,7 @@ export interface State {
   books: fromBooks.State;
   inboxitems: fromInboxItems.State;
   collection: fromCollection.State;
+  collectionInboxitem: fromCollectionInboxItem.State;
   layout: fromLayout.State;
   wizard: fromWizard.State;
   router: fromRouter.RouterState;
@@ -159,16 +161,22 @@ export const getInboxItems = createSelector(getInboxItemEntities, getInboxItemId
 
 
 export const getCollectionState = (state: State) => state.collection;
+export const getCollectionInboxItemState = (state: State) => state.collectionInboxitem;
 export const getWizardState = (state: State) => state.wizard;
 
 export const getCollectionLoaded = createSelector(getCollectionState, fromCollection.getLoaded);
 export const getCollectionLoading = createSelector(getCollectionState, fromCollection.getLoading);
 export const getCollectionBookIds = createSelector(getCollectionState, fromCollection.getIds);
+export const getCollectionInboxItemIds = createSelector(getCollectionInboxItemState, fromCollectionInboxItem.getIds);
 
 export const getWizardLoaded = createSelector(getWizardState, fromWizard.getLoaded);
 //export const getWizardLoading = createSelector(getWizardState, fromWizard.getLoading);
 
 export const getBookCollection = createSelector(getBookEntities, getCollectionBookIds, (entities, ids) => {
+  return ids.map(id => entities[id]);
+});
+
+export const getInboxItemCollection = createSelector(getInboxItemEntities, getCollectionInboxItemIds, (entities, ids) => {
   return ids.map(id => entities[id]);
 });
 

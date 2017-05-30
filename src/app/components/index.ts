@@ -7,7 +7,9 @@ import { RouterModule } from '@angular/router';
 import { BookAuthorsComponent } from './book-authors';
 import { BookDetailComponent } from './book-detail';
 import { BookPreviewComponent } from './book-preview';
+import { InboxItemPreviewComponent } from './inboxitem-preview';
 import { BookPreviewListComponent } from './book-preview-list';
+import { InboxItemPreviewListComponent } from './inboxitem-preview-list';
 import { BookSearchComponent } from './book-search';
 import { LayoutComponent } from './layout';
 import { NavItemComponent } from './nav-item';
@@ -21,7 +23,9 @@ export const COMPONENTS = [
   BookAuthorsComponent,
   BookDetailComponent,
   BookPreviewComponent,
+  InboxItemPreviewComponent,
   BookPreviewListComponent,
+  InboxItemPreviewListComponent,
   BookSearchComponent,
   LayoutComponent,
   NavItemComponent,

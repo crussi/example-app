@@ -11,6 +11,10 @@ export const schema: DBSchema = {
     books: {
       autoIncrement: true,
       primaryKey: 'id'
-    }
+    },
+    inboxitems: {
+      autoIncrement: true,
+      primaryKey: 'id'
+    }    
   }
 };

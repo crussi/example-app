@@ -17,6 +17,7 @@ import { BeginnerModule } from './wizards/beginner/beginner.module';
 import { BookEffects } from './state-management/effects/book';
 import { InboxItemEffects } from './state-management/effects/inboxitem';
 import { CollectionEffects } from './state-management/effects/collection';
+import { CollectionInboxItemEffects } from './state-management/effects/collection-inboxitem';
 import { BookExistsGuard } from './guards/book-exists';
 
 import { AppComponent } from './containers/app';
@@ -25,6 +26,7 @@ import { InboxBeginnerPageComponent } from './containers/inbox-beginner-page';
 import { ViewBookPageComponent } from './containers/view-book-page';
 import { SelectedBookPageComponent } from './containers/selected-book-page';
 import { CollectionPageComponent } from './containers/collection-page';
+import { CollectionInboxItemPageComponent } from './containers/collection-inboxitem-page';
 import { NotFoundPageComponent } from './containers/not-found-page';
 
 import { GoogleBooksService } from './services/google-books';
@@ -83,6 +85,7 @@ import { schema } from './db';
     EffectsModule.run(BookEffects),
     EffectsModule.run(InboxItemEffects),
     EffectsModule.run(CollectionEffects),
+    EffectsModule.run(CollectionInboxItemEffects),
 
     /**
      * `provideDB` sets up @ngrx/db with the provided schema and makes the Database
@@ -97,6 +100,7 @@ import { schema } from './db';
     SelectedBookPageComponent,
     ViewBookPageComponent,
     CollectionPageComponent,
+    CollectionInboxItemPageComponent,
     NotFoundPageComponent
   ],
   providers: [
